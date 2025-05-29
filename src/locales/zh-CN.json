@@ -68,5 +68,8 @@
   "emailExtractor.extractEmails": "提取邮箱",
   "emailExtractor.reset": "重置",
   "emailExtractor.extractedEmails": "已提取邮箱（{{count}}）",
-  "emailExtractor.copyToClipboard": "复制到剪贴板"
+  "emailExtractor.copyToClipboard": "复制到剪贴板",
+  "emailExtractor.uploadFile": "上传TXT文件",
+  "emailExtractor.supportedFileTypes": "支持：.txt",
+  "emailExtractor.supportedFileTypesDoc": "支持：.txt, .doc, .docx"
 } 

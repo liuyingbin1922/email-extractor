@@ -68,5 +68,8 @@
   "emailExtractor.extractEmails": "E-Mails extrahieren",
   "emailExtractor.reset": "Zurücksetzen",
   "emailExtractor.extractedEmails": "Extrahierte E-Mails ({{count}})",
-  "emailExtractor.copyToClipboard": "In Zwischenablage kopieren"
+  "emailExtractor.copyToClipboard": "In Zwischenablage kopieren",
+  "emailExtractor.uploadFile": "TXT-Datei hochladen",
+  "emailExtractor.supportedFileTypes": "Unterstützt: .txt",
+  "emailExtractor.supportedFileTypesDoc": "Unterstützt: .txt, .doc, .docx"
 } 

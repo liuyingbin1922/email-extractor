@@ -19,6 +19,7 @@ const EmailExtractor: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const outputRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Reset copied state after 2 seconds
   useEffect(() => {
@@ -117,6 +118,38 @@ const EmailExtractor: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const ext = file.name.split('.').pop()?.toLowerCase();
+    if (ext === 'txt') {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const text = event.target?.result as string;
+        setInputText(text || '');
+      };
+      reader.readAsText(file);
+    } else if (ext === 'docx') {
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const arrayBuffer = event.target?.result as ArrayBuffer;
+        try {
+          const mammoth = await import('mammoth');
+          const result = await mammoth.extractRawText({ arrayBuffer });
+          setInputText(result.value || '');
+        } catch (err) {
+          setInputText('');
+          alert('Failed to parse DOCX file.');
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    } else if (ext === 'doc') {
+      alert('Sorry, .doc files are not supported. Please save as .docx and upload again.');
+    } else {
+      alert('Unsupported file type.');
+    }
+  };
+
   return (
     <section id="email-extractor" className="py-16">
       <div className="container-custom">
@@ -209,6 +242,24 @@ const EmailExtractor: React.FC = () => {
               >
                 {t('emailExtractor.reset')}
               </button>
+            </div>
+
+            <div className="mb-6 flex items-center space-x-4">
+              <input
+                type="file"
+                accept=".txt,.doc,.docx"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+              />
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                {t('emailExtractor.uploadFile')}
+              </button>
+              <span className="text-sm text-gray-500">{t('emailExtractor.supportedFileTypesDoc')}</span>
             </div>
 
             {extractedEmails.length > 0 && (

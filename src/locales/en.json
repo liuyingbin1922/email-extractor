@@ -68,5 +68,8 @@
   "emailExtractor.extractEmails": "Extract Emails",
   "emailExtractor.reset": "Reset",
   "emailExtractor.extractedEmails": "Extracted Emails ({{count}})",
-  "emailExtractor.copyToClipboard": "Copy to clipboard"
+  "emailExtractor.copyToClipboard": "Copy to clipboard",
+  "emailExtractor.uploadFile": "Upload TXT File",
+  "emailExtractor.supportedFileTypes": "Supported: .txt",
+  "emailExtractor.supportedFileTypesDoc": "Supported: .txt, .doc, .docx"
 } 
